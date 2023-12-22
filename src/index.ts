@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
 import mongoose from 'mongoose';
-import Bluebird from "bluebird";
+import router from './router';
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 const server = http.createServer(app);
 
 server.listen(8080, () => {
-	console.log('Server running on port http://localhost:8080');
+	console.log('Server running on port http://localhost:8080/api/v1/');
 });
 
 
@@ -32,3 +32,5 @@ mongoose.connect(DATABASE)
 	.then(() => console.log('DB Connected'))
 	.catch(() => console.warn('Something went wrong'));
 mongoose.connection.on('error', (error: Error) => console.log(error));
+
+app.use('/api/v1/', router());
