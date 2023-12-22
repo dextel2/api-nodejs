@@ -6,6 +6,8 @@ import compression from "compression";
 import cors from "cors";
 import mongoose from 'mongoose';
 import router from './router';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUI from 'swagger-ui-express';
 
 const app = express();
 
@@ -22,6 +24,27 @@ const server = http.createServer(app);
 server.listen(8080, () => {
 	console.log('Server running on port http://localhost:8080/api/v1/');
 });
+
+// Swagger configuration
+const swaggerOptions = {
+	definition: {
+		openapi: '3.0.0',
+		info: {
+			title: 'Learninig.API',
+			version: '1.0.0',
+		},
+		servers: [
+			{
+				url: 'http://localhost:8080/api/v1/',
+			},
+		],
+	},
+	// Path to the API docs
+	apis: ['./router'], // Adjust the path based on your file structure
+};
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+app.use('/api/v1/', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 
 
