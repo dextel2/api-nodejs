@@ -4,7 +4,8 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
-import { MongoClient, ServerApiVersion } from "mongodb";
+import mongoose from 'mongoose';
+import Bluebird from "bluebird";
 
 const app = express();
 
@@ -22,15 +23,12 @@ server.listen(8080, () => {
 	console.log('Server running on port http://localhost:8080');
 });
 
-const DB_USERNAME = `${process.env.DATABASE}`.replace('<username>', process.env.CLUSTER_USERNAME);
-const DB_PASSWORD = `${process.env.DATABASE}`.replace('<password>', process.env.CLUSTER_PASSWORD);
+
 
 const DATABASE = 'mongodb+srv://yash:lRjqFnM9j1PJYDzn@cluster0.ymgkfim.mongodb.net/?retryWrites=true&w=majority';
-const client = new MongoClient(DATABASE, {
-	serverApi: {
-		version: ServerApiVersion.v1,
-		strict: true,
-		deprecationErrors: true,
-	}
-});
 
+mongoose.Promise = Promise;
+mongoose.connect(DATABASE)
+	.then(() => console.log('DB Connected'))
+	.catch(() => console.warn('Something went wrong'));
+mongoose.connection.on('error', (error: Error) => console.log(error));
