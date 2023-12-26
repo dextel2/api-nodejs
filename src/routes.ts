@@ -1,4 +1,4 @@
-import { register } from "./controller/authenticate";
+import { login, register } from "./controller/authenticate";
 import { Express, Request, Response } from "express";
 
 const routes = (app: Express) => {
@@ -42,6 +42,35 @@ const routes = (app: Express) => {
 	*/
 
 	app.post('/auth/register', register);
+
+
+	/**
+* @openapi
+* /auth/login:
+*   post:
+*     tags:
+*       - Authentication
+*     description: Login an exsting user
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               email:
+*                 type: string
+*               password:
+*                 type: string
+*     responses:
+*       '200':
+*         description: Successful login
+*       '400':
+*         description: Invalid request
+*       '403':
+*         description: Forbidden
+*/
+	app.post('/auth/login', login);
 
 };
 
