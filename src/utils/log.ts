@@ -6,6 +6,12 @@ const log = logger({
 		pid: false,
 	},
 	timestamp: () => `,"time":"${dayjs().format()}"`,
+	transport: {
+		target: 'pino-pretty',
+		options: {
+			colorize: true
+		}
+	}
 });
 
 

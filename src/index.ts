@@ -24,9 +24,9 @@ const DATABASE = 'mongodb+srv://yash:lRjqFnM9j1PJYDzn@cluster0.ymgkfim.mongodb.n
 
 mongoose.Promise = Promise;
 mongoose.connect(DATABASE)
-	.then(() => console.log('DB Connected'))
-	.catch(() => console.warn('Something went wrong'));
-mongoose.connection.on('error', (error: Error) => console.log(error));
+	.then(() => logger.info('DB Connected'))
+	.catch(() => logger.warn('Something went wrong'));
+mongoose.connection.on('error', (error: Error) => logger.error(error));
 
 app.listen(port, async () => {
 	logger.info(`App is running at http://localhost:${port}`);
