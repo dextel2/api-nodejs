@@ -9,18 +9,16 @@ import logger from "./utils/log";
 import swaggerDocs from './utils/swagger';
 
 const app = express();
-const port = 8080;
+const port = 9090;
 
-app.use(cors({
-	credentials: true
-}));
+app.use(cors({ credentials: true }));
 
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
 
-const DATABASE = 'mongodb+srv://yash:lRjqFnM9j1PJYDzn@cluster0.ymgkfim.mongodb.net/?retryWrites=true&w=majority';
+const DATABASE = 'mongodb+srv://karankey:Welcome11@cluster0.mkaewnx.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose.Promise = Promise;
 mongoose.connect(DATABASE)

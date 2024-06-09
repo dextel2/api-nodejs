@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
 	username: {
 		type: String,
 		required: true,
@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema({
 
 //#region Models
 
-export const UserModel = mongoose.model('Users', UserSchema);
+export const UserModel = model('Users', UserSchema);
 
 //#endregion
 
@@ -36,7 +36,7 @@ export const UserModel = mongoose.model('Users', UserSchema);
 
 export const getUsers = () => UserModel.find();
 
-export const getUserByEmail = (email: string) => UserModel.findOne({ email });
+export const getUserByEmail = (email: string) => UserModel.findOne({ email: email });
 
 export const getUserBySessionToken = (sessionToken: string) => UserModel.findOne({
 	'authentication.sessionToken': sessionToken
