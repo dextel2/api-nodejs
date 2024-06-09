@@ -4,7 +4,6 @@ import express from 'express';
 export async function findByEmail(req: express.Request, res: express.Response) {
 	try {
 		const email = req.query.email;
-		console.log(JSON.stringify(req.query.email, null, 2));
 		if (typeof email !== 'string') {
 			return res.sendStatus(400);
 		}
